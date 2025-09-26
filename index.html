@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TrueShade – Inclusive Shop</title>
+<meta name="description" content="Visually stunning, accessible eCommerce with color-blind friendly design and camera color detection.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <svg width="0" height="0" aria-hidden="true" focusable="false" class="cb-defs">
+    <defs>
+      <!-- Color vision deficiency simulation filters -->
+      <filter id="cb-protanopia">
+        <feColorMatrix type="matrix" values="0.567 0.433 0     0 0 0.558 0.442 0     0 0 0     0.242 0.758 0 0 0 0 1 0"></feColorMatrix>
+      </filter>
+      <filter id="cb-deuteranopia">
+        <feColorMatrix type="matrix" values="0.625 0.375 0     0 0 0.7 0.3 0     0 0 0     0.3 0.7 0 0 0 0 1 0"></feColorMatrix>
+      </filter>
+      <filter id="cb-tritanopia">
+        <feColorMatrix type="matrix" values="0.95 0.05 0      0 0 0    0.433 0.567  0 0 0.0 0.475 0.525 0 0 0 0 1 0"></feColorMatrix>
+      </filter>
+      <filter id="cb-achromatopsia">
+        <feColorMatrix type="saturate" values="0"></feColorMatrix>
+      </filter>
+      <filter id="cb-none">
+        <feColorMatrix type="saturate" values="1"></feColorMatrix>
+      </filter>
+    </defs>
+  </svg>
+
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <div class="brand">
+        <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="nav">
+          <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </button>
+        <a href="#" class="logo" aria-label="TrueShade Home">TrueShade</a>
+      </div>
+
+      <form class="search" role="search" aria-label="Product search">
+        <input id="search-input" type="search" placeholder="Search products, colors, textures" aria-label="Search products">
+        <button type="submit" class="btn primary" aria-label="Search">Search</button>
+      </form>
+
+      <nav id="nav" class="nav" role="navigation" aria-label="Primary">
+        <button id="open-wishlist" class="icon-btn" aria-haspopup="true" aria-controls="wishlist-drawer" aria-expanded="false">Wishlist</button>
+        <button id="open-cart" class="icon-btn" aria-haspopup="true" aria-controls="cart-drawer" aria-expanded="false">Cart</button>
+        <button id="open-camera" class="icon-btn" aria-haspopup="dialog" aria-controls="camera-modal" aria-expanded="false">Color Detector</button>
+        <div class="filter-select">
+          <label for="cb-filter" class="visually-hidden">Color vision filter</label>
+          <select id="cb-filter" aria-label="Color vision filter">
+            <option value="none">No Filter</option>
+            <option value="protanopia">Protanopia</option>
+            <option value="deuteranopia">Deuteranopia</option>
+            <option value="tritanopia">Tritanopia</option>
+            <option value="achromatopsia">Achromatopsia</option>
+          </select>
+        </div>
+      </nav>
+    </div>
+    <div class="cb-banner" role="region" aria-live="polite" aria-atomic="true">
+      <p><strong>Filter:</strong> <span id="cb-label">No Filter</span> • <span id="cb-desc">Natural colors</span></p>
+    </div>
+  </header>
+
+  <main id="main" class="main" role="main">
+    <section class="hero" aria-label="Feature products">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-content">
+        <h1 class="title">Bold style, crystal clarity</h1>
+        <p class="subtitle">Shop with confidence with TrueShade—crafted for color accessibility and beauty.</p>
+        <div class="hero-cta">
+          <a href="#catalog" class="btn primary lg">Explore Catalog</a>
+          <button id="hero-camera" class="btn ghost lg">Detect Real-World Color</button>
+        </div>
+      </div>
+      <div class="parallax decor" aria-hidden="true"></div>
+    </section>
+
+    <section id="personalization" class="personalization" aria-label="Personalization">
+      <div class="prefs">
+        <label><input type="checkbox" id="pref-high-contrast"> Prefer maximum contrast</label>
+        <label><input type="checkbox" id="pref-large-text"> Prefer larger text</label>
+      </div>
+      <div class="recommend" aria-live="polite" aria-atomic="true">
+        <h2>Recommended for you</h2>
+        <div class="product-row" id="recommend-row"></div>
+      </div>
+    </section>
+
+    <section id="catalog" class="catalog" aria-label="Product catalog">
+      <aside class="sidebar" aria-label="Catalog filters">
+        <h2>Filters</h2>
+        <div class="filter-group">
+          <label for="price-range">Price</label>
+          <input type="range" id="price-range" min="0" max="500" value="250" aria-valuemin="0" aria-valuemax="500" aria-valuenow="250">
+          <output id="price-output" for="price-range">Up to $250</output>
+        </div>
+        <div class="filter-group">
+          <fieldset>
+            <legend>Color families</legend>
+            <label><input type="checkbox" value="warm" class="color-family"> Warm</label>
+            <label><input type="checkbox" value="cool" class="color-family"> Cool</label>
+            <label><input type="checkbox" value="neutral" class="color-family"> Neutral</label>
+          </fieldset>
+        </div>
+        <div class="filter-group">
+          <label for="tag-filter">Tags</label>
+          <select id="tag-filter" multiple aria-label="Product tags">
+            <option value="eco">Eco</option>
+            <option value="new">New</option>
+            <option value="bestseller">Bestseller</option>
+          </select>
+        </div>
+      </aside>
+
+      <section class="products" id="products" aria-live="polite">
+        <!-- Products rendered by JS -->
+      </section>
+    </section>
+  </main>
+
+  <aside id="cart-drawer" class="drawer" aria-label="Shopping cart" aria-hidden="true">
+    <div class="drawer-header">
+      <h2>Cart</h2>
+      <button class="close" data-close="cart-drawer" aria-label="Close cart">×</button>
+    </div>
+    <div id="cart-items" class="drawer-body"></div>
+    <div class="drawer-footer">
+      <div class="totals"><span>Subtotal</span><strong id="cart-subtotal">$0</strong></div>
+      <button id="checkout" class="btn primary">Checkout</button>
+    </div>
+  </aside>
+
+  <aside id="wishlist-drawer" class="drawer" aria-label="Wishlist" aria-hidden="true">
+    <div class="drawer-header">
+      <h2>Wishlist</h2>
+      <button class="close" data-close="wishlist-drawer" aria-label="Close wishlist">×</button>
+    </div>
+    <div id="wishlist-items" class="drawer-body"></div>
+  </aside>
+
+  <div id="camera-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="camera-title" aria-hidden="true">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="camera-title">Real-world Color Detector</h2>
+        <button class="close" data-close="camera-modal" aria-label="Close color detector">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="camera-wrap">
+          <video id="camera" autoplay playsinline></video>
+          <canvas id="camera-canvas" aria-hidden="true"></canvas>
+          <div id="color-readout" role="status" aria-live="polite">
+            <span class="swatch" id="readout-swatch" aria-hidden="true"></span>
+            <div class="readout-text">
+              <strong id="readout-name">—</strong>
+              <span id="readout-hex">#------</span>
+              <span id="readout-desc">—</span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button id="snap-color" class="btn primary">Sample Color</button>
+          <button id="toggle-torch" class="btn ghost">Toggle Torch</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer" role="contentinfo">
+    <p>© <span id="year"></span> TrueShade. Designed for everyone.</p>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
+
